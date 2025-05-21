@@ -8,15 +8,11 @@ import java.util.*;
 
 public class StreamService {
 
-    private static final Set<String> usedTop3Streamers = new HashSet<>();
-
     public StreamService() {
 
     }
 
     public static ObjectNode process(JsonNode input) {
-
-        Set<String> usedTop3Streamers = new HashSet<>();
 
         ObjectNode output = JsonNodeFactory.instance.objectNode();
 
