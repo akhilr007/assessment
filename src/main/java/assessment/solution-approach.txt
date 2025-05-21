@@ -1,0 +1,46 @@
+1. Iterate through each section in the input data
+
+2.For each section, I maintain a LinkedHashSet to track seen IDs and
+a List to store the first three unique IDs encountered.
+I iterate through the section's original streamer list,
+adding an ID to my "top 3 uniques" list only if it hasn't been seen yet, until I collect three unique IDs.
+
+3. Once the top 3 unique IDs are identified,
+I create a new list for that section.
+It starts with these three unique IDs, followed by all remaining streamer IDs from the original list.
+
+
+-----------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXX -------------------------------------
+
+POTENTIAL FAILURES:
+
+Scenario: A section has fewer than three total unique streamer IDs.
+
+Failure Reason: Your code correctly de-duplicates but won't output a "top 3"
+if fewer than three unique streams exist.
+For example, a section with just one unique stream will only show that one stream, not three.
+This might contradict user expectations of always seeing a "top 3."
+
+Solution: After collecting unique streams for the top 3,
+add placeholder IDs to fill any remaining slots until there are exactly three.
+This ensures a consistent "top 3" presentation.
+
+For example:
+
+input:
+{
+  "lokalisedKey": "music",
+  "sectionID": "music",
+  "sectionData": [
+    { "streamerID": "1111-aaaa-bbbb" },
+    { "streamerID": "1111-aaaa-bbbb" }
+  ]
+}
+
+Current Code's Output:
+"music": ["1111-aaaa-bbbb"]
+(Only one stream is output, not a "top 3")
+
+Desired Output (with Solution):
+"shortMusicPicks": ["1111-aaaa-bbbb", "PLACEHOLDER_ID_2", "PLACEHOLDER_ID_3"]
+(Fills empty slots to ensure a "top 3" is always displayed for user experience)
